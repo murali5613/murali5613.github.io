@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muralidhar Kondaveeti — Data Science &amp; Applied ML</title>
+<meta name="description" content="Portfolio of Muralidhar Kondaveeti — data science student building applied ML systems: LLM safety classifiers, computer vision, and reasoning models.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f6f3;
+    --panel: #ffffff;
+    --panel-tint: #eceafb;
+    --ink: #101114;
+    --ink-soft: #55575e;
+    --line: #e2e0d8;
+    --indigo: #3d3dd6;
+    --coral: #ff6b52;
+    --indigo-tint: #eceafb;
+    --coral-tint: #ffe9e3;
+    --maxw: 1080px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--indigo); }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- Header ---------- */
+  header.top { padding: 26px 0; }
+  header.top .wrap { display: flex; justify-content: space-between; align-items: center; }
+  .mark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+  .mark span { color: var(--indigo); }
+  nav.top-links { display: flex; gap: 28px; font-size: 15px; }
+  nav.top-links a { color: var(--ink); text-decoration: none; font-weight: 500; }
+  nav.top-links a:hover { color: var(--indigo); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 40px 0 70px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--indigo);
+    background: var(--indigo-tint);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 5.4vw, 4.2rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 22px;
+  }
+  .hero h1 .accent { color: var(--indigo); }
+  .hero p.bio { max-width: 46ch; color: var(--ink-soft); font-size: 18px; margin: 0 0 32px; }
+  .hero .links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero .links a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 11px 20px;
+    border-radius: 100px;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero .links a.primary { background: var(--ink); color: var(--panel); }
+  .hero .links a:hover { background: var(--indigo); border-color: var(--indigo); color: #fff; }
+
+  .hero-visual { display: flex; justify-content: center; align-items: center; }
+  .hero-visual svg { width: 100%; max-width: 380px; height: auto; }
+  .node-anim circle, .node-anim line { opacity: 0; animation: appear 0.5s ease forwards; }
+  @keyframes appear { to { opacity: 1; } }
+
+  /* ---------- Stats ---------- */
+  .stats {
+    background: var(--ink);
+    color: var(--panel);
+    padding: 40px 0;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: #fff;
+  }
+  .stat-num span { color: var(--coral); }
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: #9a9cae;
+    margin-top: 4px;
+  }
+
+  /* ---------- Section shared ---------- */
+  section.block { padding: 84px 0; }
+  .section-head { max-width: 60ch; margin-bottom: 48px; }
+  .section-head .eyebrow-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--coral);
+    display: block;
+    margin-bottom: 10px;
+  }
+  section.block h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  section.block p.lede { color: var(--ink-soft); margin: 0; font-size: 17px; }
+
+  /* ---------- Projects ---------- */
+  .projects { display: flex; flex-direction: column; gap: 20px; }
+  .project {
+    background: var(--panel);
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 36px;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 24px;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .project:hover { border-color: var(--indigo); transform: translateY(-2px); }
+  .project-icon {
+    width: 64px; height: 64px;
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--indigo-tint);
+  }
+  .project-icon svg { width: 30px; height: 30px; stroke: var(--indigo); }
+  .project:nth-child(2) .project-icon { background: var(--coral-tint); }
+  .project:nth-child(2) .project-icon svg { stroke: var(--coral); }
+  .project-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .project-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; margin: 0 0 10px; }
+  .project-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--coral);
+    background: var(--coral-tint);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .project-desc { color: var(--ink-soft); margin: 0 0 16px; max-width: 62ch; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .project-tags span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    border-radius: 100px;
+    color: var(--ink-soft);
+  }
+  .project-links { display: flex; gap: 20px; font-size: 14px; }
+  .project-links a { text-decoration: none; font-weight: 600; }
+  .project-links a:hover { color: var(--coral); }
+
+  /* ---------- More on GitHub ---------- */
+  #more-repos { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .repo-row {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 16px 20px;
+    background: var(--panel);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    font-size: 15px;
+  }
+  .repo-row a { text-decoration: none; font-weight: 600; color: var(--ink); }
+  .repo-row a:hover { color: var(--indigo); }
+  .repo-meta { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-soft); white-space: nowrap; }
+  .repo-desc { color: var(--ink-soft); font-size: 14px; margin: 4px 0 0; }
+  .repo-fallback { color: var(--ink-soft); font-size: 14px; }
+
+  /* ---------- Skills ---------- */
+  .skills-section { background: var(--panel-tint); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+  .skills-card { background: var(--panel); border-radius: 16px; padding: 24px; border: 1.5px solid var(--line); }
+  .skills-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    margin: 0 0 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .skills-card h3 .sw { width: 8px; height: 8px; border-radius: 2px; background: var(--indigo); }
+  .skills-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .skills-card li {
+    font-size: 14px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 6px 12px;
+    border-radius: 100px;
+  }
+
+  /* ---------- Footer / Contact ---------- */
+  footer.block { background: var(--ink); color: #fff; }
+  footer.block h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 16px; letter-spacing: -0.01em; }
+  footer.block .accent { color: var(--coral); }
+  footer.block p { color: #b7b8c4; max-width: 50ch; font-size: 17px; }
+  footer .contact-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+  footer .contact-links a {
+    text-decoration: none; color: #fff; font-weight: 500; font-size: 15px;
+    padding: 11px 20px; border-radius: 100px; border: 1.5px solid #3a3c4a;
+  }
+  footer .contact-links a:hover { background: var(--coral); border-color: var(--coral); }
+  .fineprint { margin-top: 56px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6d6f80; }
+
+  @media (max-width: 780px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; max-width: 260px; margin: 0 auto 20px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .project { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="mark">MK<span>.</span></span>
+    <nav class="top-links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Open to internships &amp; research roles</span>
+      <h1>Building ML systems that <span class="accent">ship</span>, not just train.</h1>
+      <p class="bio">
+        I'm Muralidhar — a final-year Data Science &amp; Programming student at IIT Madras.
+        I take models from notebook to deployed product: a live LLM safety classifier,
+        low-light object detection, and reasoning models trained with reinforcement learning.
+      </p>
+      <div class="links">
+        <a class="primary" href="mailto:murali20228@gmail.com">Get in touch</a>
+        <a href="https://github.com/murali5613" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/muralidhar-kondaveeti-943176199/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="node-anim">
+        <line x1="120" y1="90" x2="220" y2="150" stroke="#3d3dd6" stroke-width="2" style="animation-delay:.1s"/>
+        <line x1="220" y1="150" x2="310" y2="100" stroke="#3d3dd6" stroke-width="2" style="animation-delay:.2s"/>
+        <line x1="220" y1="150" x2="200" y2="260" stroke="#ff6b52" stroke-width="2" style="animation-delay:.3s"/>
+        <line x1="200" y1="260" x2="100" y2="300" stroke="#3d3dd6" stroke-width="2" style="animation-delay:.4s"/>
+        <line x1="200" y1="260" x2="300" y2="310" stroke="#ff6b52" stroke-width="2" style="animation-delay:.5s"/>
+        <line x1="120" y1="90" x2="80" y2="190" stroke="#3d3dd6" stroke-width="2" style="animation-delay:.15s"/>
+        <line x1="80" y1="190" x2="200" y2="260" stroke="#3d3dd6" stroke-width="2" style="animation-delay:.35s"/>
+        <circle cx="120" cy="90" r="9" fill="#3d3dd6" style="animation-delay:0s"/>
+        <circle cx="310" cy="100" r="7" fill="#3d3dd6" style="animation-delay:.25s"/>
+        <circle cx="220" cy="150" r="11" fill="#101114" style="animation-delay:.05s"/>
+        <circle cx="80" cy="190" r="6" fill="#ff6b52" style="animation-delay:.2s"/>
+        <circle cx="200" cy="260" r="13" fill="#ff6b52" style="animation-delay:.3s"/>
+        <circle cx="100" cy="300" r="7" fill="#3d3dd6" style="animation-delay:.45s"/>
+        <circle cx="300" cy="310" r="8" fill="#101114" style="animation-delay:.5s"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div><div class="stat-num">7.7<span>/10</span></div><div class="stat-label">CGPA — IIT Madras</div></div>
+    <div><div class="stat-num">3</div><div class="stat-label">ML systems shipped</div></div>
+    <div><div class="stat-num">8,025</div><div class="stat-label">images — vision project</div></div>
+    <div><div class="stat-num">1</div><div class="stat-label">model live on HuggingFace</div></div>
+  </div>
+</section>
+
+<section class="block" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow-label">01 · FEATURED WORK</span>
+      <h2>Projects I've built end to end</h2>
+      <p class="lede">Chosen for depth over breadth — each one shipped, deployed, or actively training.</p>
+    </div>
+
+    <div class="projects">
+      <div class="project">
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3Z"/><path d="m9.5 12 2 2 4-4"/></svg>
+        </div>
+        <div>
+          <div class="project-head">
+            <h3 class="project-title">Guardrail Classifier for LLM Safety</h3>
+          </div>
+          <p class="project-desc">
+            A three-class safety classifier — benign, jailbreak, or harmful — built on mDeBERTa-v3-base
+            to flag risky prompts before they reach a language model. Deployed publicly with a live demo.
+          </p>
+          <div class="project-tags"><span>mDeBERTa-v3</span><span>Text Classification</span><span>Gradio</span><span>HuggingFace</span></div>
+          <div class="project-links">
+            <a href="https://huggingface.co/DS-AI-Group10/guardrail-mdeberta-v3-jailbreak" target="_blank" rel="noopener">Live demo ↗</a>
+            <a href="https://github.com/murali5613" target="_blank" rel="noopener">Code ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div>
+          <div class="project-head">
+            <h3 class="project-title">Low-Light Mosquito Detection</h3>
+          </div>
+          <p class="project-desc">
+            Fine-tuned YOLO11m to detect and classify six mosquito species across 8,025 low-light images
+            for a Kaggle competition, working within a strict 10-hour GPU training budget.
+          </p>
+          <div class="project-tags"><span>YOLO11</span><span>Object Detection</span><span>Computer Vision</span><span>Kaggle</span></div>
+          <div class="project-links">
+            <a href="https://github.com/murali5613" target="_blank" rel="noopener">Code ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="4"/></svg>
+        </div>
+        <div>
+          <div class="project-head">
+            <h3 class="project-title">RL Fine-Tuning for Reasoning</h3>
+            <span class="project-status">In progress</span>
+          </div>
+          <p class="project-desc">
+            Training a small language model (Qwen3-1.7B) with GRPO-based reinforcement learning against
+            verifiable math and logic rewards, built and trained locally end to end with Unsloth.
+          </p>
+          <div class="project-tags"><span>GRPO</span><span>Reinforcement Learning</span><span>Unsloth</span><span>Qwen3</span></div>
+          <div class="project-links">
+            <a href="https://github.com/murali5613" target="_blank" rel="noopener">Follow progress ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:64px;">
+      <span class="eyebrow-label">02 · MORE</span>
+      <h2>More on GitHub</h2>
+      <p class="lede">Pulled live from GitHub — updates automatically, no edits needed.</p>
+    </div>
+    <div id="more-repos"><p class="repo-fallback">Loading repositories…</p></div>
+  </div>
+</section>
+
+<section class="block skills-section" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow-label">03 · TOOLKIT</span>
+      <h2>Skills &amp; tools</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skills-card">
+        <h3><span class="sw"></span>Languages</h3>
+        <ul><li>Python</li><li>SQL</li></ul>
+      </div>
+      <div class="skills-card">
+        <h3><span class="sw"></span>ML &amp; DL</h3>
+        <ul><li>PyTorch</li><li>Transformers</li><li>Unsloth</li><li>YOLO</li></ul>
+      </div>
+      <div class="skills-card">
+        <h3><span class="sw"></span>Focus areas</h3>
+        <ul><li>NLP &amp; LLM safety</li><li>Computer vision</li><li>Reinforcement learning</li></ul>
+      </div>
+      <div class="skills-card">
+        <h3><span class="sw"></span>Tools</h3>
+        <ul><li>Git / GitHub</li><li>Gradio</li><li>Kaggle</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="block" id="contact">
+  <div class="wrap">
+    <h2>Let's build <span class="accent">something.</span></h2>
+    <p>Open to internship and research opportunities in applied ML. Reach out directly — I usually reply within a day or two.</p>
+    <div class="contact-links">
+      <a href="mailto:murali20228@gmail.com">murali20228@gmail.com</a>
+      <a href="https://www.linkedin.com/in/muralidhar-kondaveeti-943176199/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/murali5613" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="fineprint">Built &amp; maintained by Muralidhar Kondaveeti.</p>
+  </div>
+</footer>
+
+<script>
+  (async () => {
+    const container = document.getElementById('more-repos');
+    const featuredKeywords = ['guardrail', 'mosquito'];
+    try {
+      const res = await fetch('https://api.github.com/users/murali5613/repos?sort=updated&per_page=10');
+      if (!res.ok) throw new Error('GitHub API error');
+      const repos = await res.json();
+      const filtered = repos
+        .filter(r => !r.fork)
+        .filter(r => !featuredKeywords.some(k => r.name.toLowerCase().includes(k)))
+        .slice(0, 6);
+      if (!filtered.length) {
+        container.innerHTML = '<p class="repo-fallback">No additional public repositories yet.</p>';
+        return;
+      }
+      container.innerHTML = filtered.map(r => `
+        <div class="repo-row">
+          <div>
+            <a href="${r.html_url}" target="_blank" rel="noopener">${r.name}</a>
+            ${r.description ? `<p class="repo-desc">${r.description}</p>` : ''}
+          </div>
+          <span class="repo-meta">${r.language ? r.language + ' · ' : ''}★ ${r.stargazers_count}</span>
+        </div>
+      `).join('');
+    } catch (e) {
+      container.innerHTML = '<p class="repo-fallback">Couldn\'t load repositories right now — see the full list on <a href="https://github.com/murali5613" target="_blank" rel="noopener">GitHub</a>.</p>';
+    }
+  })();
+</script>
+
+</body>
+</html>
